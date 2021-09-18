@@ -1,6 +1,7 @@
 CREATE DATABASE me;
 
 SHOW DATABASES;
+
 USE me;
 
 -- 跑步日历表，课表、完成情况（含饮食睡眠精神状况）、课表日期，备注（装备）、是否显示
@@ -31,6 +32,17 @@ CREATE TABLE IF NOT EXISTS tbl_record(
   equivalent_marathon INT,
   PRIMARY KEY (rid)
 );
+
+-- 用户表，主要用于管理员后台权限
+CREATE TABLE IF NOT EXISTS tbl_user(
+  uid INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  level TINYINT NOT NULL,
+  create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  update_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (uid)
+); 
 
 SHOW TABLES;
 
