@@ -41,12 +41,14 @@ CREATE TABLE IF NOT EXISTS tbl_user(
   email CHAR(32) NOT NULL COMMENT '邮箱',
   password CHAR(32) NOT NULL COMMENT '密码',
   salt CHAR(8) NOT NULL COMMENT '盐',
-  level TINYINT NOT NULL COMMENT '用户组',
+  level TINYINT NOT NULL DEFAULT 0 COMMENT '用户组',
   create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   update_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (uid),
   UNIQUE INDEX idx_email (email)
 ); 
+
+INSERT INTO tbl_user(nickname, email, password, salt, level) VALUES ('test_user', 'user@qq.com', '123456', '654321', 0)
 
 -- 菜谱列表，用于菜谱列表页
 -- CREATE TABLE IF NOT EXISTS tbl_recipe_list(

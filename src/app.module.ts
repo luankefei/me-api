@@ -4,11 +4,12 @@ import * as fs from 'fs';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { AppController } from './app.controller';
-import { RunningController } from './controllers/running.controller';
-import { UserController } from './controllers/user.controller';
+// import { AppController } from './app.controller';
+import { UserModule } from './user/user.module';
+// import { RunningController } from './running/running.controller';
+// import { UserController } from './user/user.controller';
 import { AppService } from './app.service';
-import { User } from './entities/user.entity';
+// import { User } from './user/user.entity';
 
 let config;
 try {
@@ -19,8 +20,8 @@ try {
 }
 
 @Module({
-  imports: [TypeOrmModule.forRoot({ ...config, entities: [User] })],
-  controllers: [AppController, UserController, RunningController],
-  providers: [AppService],
+  imports: [TypeOrmModule.forRoot(config), UserModule],
+  // controllers: [AppController, UserController, RunningController],
+  // providers: [AppService],
 })
 export class AppModule {}
