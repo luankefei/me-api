@@ -6,6 +6,9 @@ export class User {
   uid: number;
 
   @Column()
+  username: string;
+
+  @Column()
   nickname: string;
 
   @Column()
@@ -18,5 +21,5 @@ export class User {
   salt: string;
 
   @Column()
-  level: string;
+  level: number;
 }

@@ -1,8 +1,9 @@
-export interface User {
+export interface IUser {
   uid: number;
+  username: string;
   nickname: string;
   email: string;
   password: string;
   salt: string;
-  level: string;
+  level: number;
 }
