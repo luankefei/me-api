@@ -1,27 +1,25 @@
+import * as yaml from 'js-yaml';
+import * as path from 'path';
+import * as fs from 'fs';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { AppController } from './app.controller';
 import { RunningController } from './controllers/running.controller';
 import { UserController } from './controllers/user.controller';
 import { AppService } from './app.service';
 import { User } from './entities/user.entity';
 
+let config;
+try {
+  const dbConfig = fs.readFileSync(path.resolve('db/database.yaml'), 'utf-8');
+  config = yaml.load(dbConfig);
+} catch (e) {
+  console.log(e);
+}
+
 @Module({
-  imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'Root1234',
-      database: 'test',
-      entities: [User],
-      synchronize: true,
-      retryDelay: 3000, // 两次重试连接的间隔
-      retryAttempts: 10, // 重试连接数据库次数
-      keepConnectionAlive: false, // 在应用程序关闭后连接不关闭
-    }),
-  ],
+  imports: [TypeOrmModule.forRoot({ ...config, entities: [User] })],
   controllers: [AppController, UserController, RunningController],
   providers: [AppService],
 })
