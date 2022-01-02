@@ -20,7 +20,7 @@ export class UserService {
     temp.level = 0;
     temp.nickname = user.nickname;
     temp.password = user.password;
-    temp.salt = '';
+    temp.salt = user.salt;
     temp.username = user.username;
 
     return this.userRepository.save(temp);
