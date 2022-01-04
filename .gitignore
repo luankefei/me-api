@@ -1,5 +1,6 @@
 # private
 /db/database.yaml
+/src/app.constants.ts
 
 # compiled output
 /dist
