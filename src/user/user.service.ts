@@ -34,4 +34,18 @@ export class UserService {
   findAll(): Promise<User[]> {
     return this.userRepository.find();
   }
+
+  async validateUser(username: string, pass: string): Promise<any> {
+    const user = await this.findOne(username);
+    if (user && user.password === pass) {
+      const { password, ...result } = user;
+      return result;
+    }
+    return null;
+  }
+
+  // async login(user: any) {
+  //   const payload = { username: user.username,  };
+  //   return this.validateUser();
+  // }
 }

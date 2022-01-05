@@ -3,7 +3,7 @@ export interface IUser {
   username: string;
   nickname: string;
   email: string;
-  password: string;
+  password?: string;
   salt: string;
   level: number;
 }

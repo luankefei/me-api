@@ -2,7 +2,17 @@
  * 用户路由
  */
 import crypto from 'crypto';
-import { Body, Controller, Get, Post, Query, Req } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  // Query,
+  // Req,
+  // Res,
+  Response,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 // import { Request } from 'express';
 import { User } from './user.entity';
@@ -43,5 +53,23 @@ export class UserController {
   @Get()
   findAll(): Promise<any[]> {
     return this.userService.findAll();
+  }
+
+  @Post()
+  async login(@Response() res, user: IUser): Promise<IUser> {
+    const { username, password } = user;
+    const result = await this.userService.validateUser(username, password);
+    const salt = generateSalt();
+    const userNameHash = encrypt(username, salt);
+    if (result === null) {
+      throw UnauthorizedException;
+    }
+
+    res.cookie('me_signed_username', userNameHash, {
+      maxAge: 1000 * 60 * 24,
+      httpOnly: true,
+    });
+
+    return result;
   }
 }
