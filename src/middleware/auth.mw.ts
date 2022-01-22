@@ -12,7 +12,6 @@ export const GetAuth = createParamDecorator(
     const userId = (params && params['user_id']) || '';
 
     if (!userId && data.blocked) {
-      // tslint:disable-next-line
       ctx.res.statusCode = 401;
       ctx.res.statusMessage = encodeURIComponent('登录信息失效，请重新登录');
       ctx.res.end();

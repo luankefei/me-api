@@ -16,7 +16,7 @@ import {
 import { UserService } from './user.service';
 // import { Request } from 'express';
 import { User } from './user.entity';
-import { IUser } from '../interfaces/user.interface';
+import { IUser } from '../interface/user.interface';
 
 /*
  * 10位盐

@@ -2,7 +2,7 @@
  * 跑步相关服务
  */
 import { Injectable } from '@nestjs/common';
-import { RunningSchedule } from '../interfaces/running.interface';
+import { RunningSchedule } from '../interface/running.interface';
 
 @Injectable()
 export class RunningService {
